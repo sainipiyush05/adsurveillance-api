@@ -1,50 +1,46 @@
-"""
-AutoCreate API – Production Entry Point (Railway Compatible)
-"""
-
 import os
 from flask import Flask
 from flask_cors import CORS
 
-# Import all blueprints
-from app.api.AutoCreate.audience_step import audience_bp
-from app.api.AutoCreate.budget_testing import budget_testing_bp
-from app.api.AutoCreate.campaign_goal import campaign_goal_bp
-from app.api.AutoCreate.copy_messaging import copy_messaging_bp
-from app.api.AutoCreate.creative_assets import creative_assets_bp
+# Import blueprints from existing modules
+from app.api.auth import auth_bp
+from app.api.ads_refresh import ads_refresh_bp
+from app.api.ads_status import ads_status_bp
+from app.api.competitors import competitors_bp
+from app.api.daily_metrics import daily_metrics_bp
+from app.api.main_dashboard import dashboard_bp
+from app.api.targeting_intel import targeting_intel_bp
+from app.api.user_analytics import user_analytics_bp
+
 
 def create_app():
-    """
-    Create and configure the Flask application
-    """
     app = Flask(__name__)
-
-    # Enable CORS (lock this down later if needed)
-    CORS(app, resources={r"/*": {"origins": "*"}})
+    CORS(app)
 
     # Register blueprints
-    app.register_blueprint(audience_bp)
-    app.register_blueprint(budget_testing_bp)
-    app.register_blueprint(campaign_goal_bp)
-    app.register_blueprint(copy_messaging_bp)
-    app.register_blueprint(creative_assets_bp)
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(ads_refresh_bp)
+    app.register_blueprint(ads_status_bp)
+    app.register_blueprint(competitors_bp)
+    app.register_blueprint(daily_metrics_bp)
+    app.register_blueprint(dashboard_bp)
+    app.register_blueprint(targeting_intel_bp)
+    app.register_blueprint(user_analytics_bp)
 
-    # Root endpoint
-    @app.route("/", methods=["GET"])
+    @app.route("/")
     def root():
         return {
-            "service": "AutoCreate",
+            "service": "AdSurveillance API",
             "status": "running",
-            "environment": os.getenv("RAILWAY_ENVIRONMENT", "development"),
+            "environment": os.getenv("RAILWAY_ENVIRONMENT", "development")
         }
 
-    # Health check endpoint (Railway uses this implicitly)
-    @app.route("/health", methods=["GET"])
+    @app.route("/health")
     def health():
         return {"status": "healthy"}, 200
 
     return app
 
 
-# 🔥 Gunicorn entrypoint (THIS IS WHAT RAILWAY USES)
+# Gunicorn entry point
 app = create_app()

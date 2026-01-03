@@ -10,6 +10,9 @@ from supabase import create_client, Client
 import os
 import sys
 import time
+from flask import Blueprint
+
+ads_status_bp = Blueprint("ads_status", __name__)
 
 # Add parent directory to path to import config
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
