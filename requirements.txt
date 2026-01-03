@@ -28,3 +28,4 @@ pandas
 numpy
 openpyxl
 sentry-sdk
+supabase   ← ✅ THIS WAS MISSING
