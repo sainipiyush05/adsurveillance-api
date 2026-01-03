@@ -8,7 +8,11 @@ import jwt
 from dotenv import load_dotenv
 import os
 # ❌ MISSING IMPORT
-from flask_cors import CORS, cross_origin  # Add cross_origin import
+from flask_cors import CORS, cross_origin 
+from flask import Blueprint
+
+auth = Blueprint("auth", __name__)
+# Add cross_origin import
 
 # Or just remove the decorator since CORS is already configured globally
 
