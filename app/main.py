@@ -7,12 +7,11 @@ from flask import Flask
 from flask_cors import CORS
 
 # Import all blueprints
-from autocreate.api.AutoCreate.audience_step import audience_bp
-from autocreate.api.AutoCreate.budget_testing import budget_testing_bp
-from autocreate.api.AutoCreate.campaign_goal import campaign_goal_bp
-from autocreate.api.AutoCreate.copy_messaging import copy_messaging_bp
-from autocreate.api.AutoCreate.creative_assets import creative_assets_bp
-
+from app.api.AutoCreate.audience_step import audience_bp
+from app.api.AutoCreate.budget_testing import budget_testing_bp
+from app.api.AutoCreate.campaign_goal import campaign_goal_bp
+from app.api.AutoCreate.copy_messaging import copy_messaging_bp
+from app.api.AutoCreate.creative_assets import creative_assets_bp
 
 def create_app():
     """
